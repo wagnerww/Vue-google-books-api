@@ -11,8 +11,6 @@
 </template>
 
 <script>
-//AIzaSyB-_Clu4jgIn5XJ-B92UQ2MZlYTi5GGm7E
-
 import FeedBack from "./components/feedback/FeedBack.vue";
 import appHeader from "./components/header/Header.vue";
 

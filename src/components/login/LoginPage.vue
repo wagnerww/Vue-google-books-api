@@ -16,7 +16,7 @@ export default {
   name: "LoginPage",
   data() {
     return {
-      token: ""
+      token: "AIzaSyB-_Clu4jgIn5XJ-B92UQ2MZlYTi5GGm7E"
     };
   },
   methods: {
