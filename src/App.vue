@@ -1,18 +1,26 @@
 <template>
   <v-app>
-    <v-container fluid>
-      <v-row>
-        <v-col cols="4" class="red"></v-col>
-        <v-col cols="4" class="green"></v-col>
-        <v-col cols="4" class="blue"></v-col>
-      </v-row>
-    </v-container>
+    <app-header/>
+
+    <v-content>
+      <router-view/>
+    </v-content>
+
+    <feedBack/>
   </v-app>
 </template>
 
 <script>
 //AIzaSyB-_Clu4jgIn5XJ-B92UQ2MZlYTi5GGm7E
+
+import FeedBack from "./components/feedback/FeedBack.vue";
+import appHeader from "./components/header/Header.vue";
+
 export default {
-  name: "App"
+  name: "App",
+  components: {
+    FeedBack,
+    appHeader
+  }
 };
 </script>
