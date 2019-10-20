@@ -2,10 +2,11 @@
   <div>
     <v-row>
       <v-col cols="12">
-        <v-text-field v-model="textSearch" label="Pesquise algo... " @input="doSearch"/>
+        <search-input-field @search="doSearch"/>
       </v-col>
     </v-row>
-    <v-row v-if="!textSearch" justify="center">
+
+    <v-row v-if="!bookList.length" justify="center">
       <v-col cols="12" md="4" class="text-center">
         <p class="overline">Digtite algo para iniciar a pesquisa</p>
       </v-col>
@@ -24,28 +25,27 @@
 <script>
 import Loading from "../loading/Loading.vue";
 import BookItem from "./BookItem.vue";
+import api from "../api/api";
+import SearchInputField from "../search/searchInputField.vue";
 
-const axios = require("axios");
 export default {
   name: "BookList",
-  components: { Loading, BookItem },
+  components: { Loading, SearchInputField, BookItem },
+  mixins: [api],
   data() {
     return {
-      textSearch: "",
       bookList: [],
       searchOnGoing: false
     };
   },
   methods: {
-    async doSearch() {
+    async doSearch(textSearch) {
       try {
-        if (this.textSearch) {
+        if (textSearch) {
           this.searchOnGoing = true;
-          const { data } = await axios.get(
-            `https://www.googleapis.com/books/v1/volumes?q=${this.textSearch}`
-          );
+          const { items } = await this.get(`/volumes?q=${textSearch}`);
+          this.bookList = items;
 
-          this.bookList = data.items;
           this.searchOnGoing = false;
         } else {
           this.bookList = [];

@@ -20,13 +20,14 @@
         text
         small
         color="primary"
-        @click="goToPreview"
+        @click="goToPreview(book)"
       >Ver Preview</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import bookService from "./bookService";
 export default {
   name: "BookItem",
   props: { book: { type: Object, required: true } },
@@ -36,13 +37,11 @@ export default {
     };
   },
   methods: {
-    goToPreview() {
-      window.open(this.book.volumeInfo.previewLink, "_blank");
-    },
     gotToDetails() {
       this.$router.push(`/book/${this.book.id}`);
     }
-  }
+  },
+  mixins: [bookService]
 };
 </script>
 

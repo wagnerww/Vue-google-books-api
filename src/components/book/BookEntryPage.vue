@@ -40,7 +40,7 @@
         <div class="mt-4" v-if="book.volumeInfo.previewLink">
           <v-subheader>Ações</v-subheader>
           <v-divider class="mb-2"/>
-          <v-btn text color="primary" @click="goToPreview">Ver Preview</v-btn>
+          <v-btn text color="primary" @click="goToPreview(book)">Ver Preview</v-btn>
         </div>
       </v-col>
     </v-row>
@@ -48,7 +48,8 @@
 </template>
 
 <script>
-import axios from "axios";
+import api from "../api/api";
+import bookService from "./bookService";
 
 export default {
   name: "BookEntryPage",
@@ -58,21 +59,14 @@ export default {
     };
   },
   async created() {
-    try {
-      const { data } = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes/${this.$route.params.id}`
-      );
-      this.book = data;
-    } catch (error) {}
+    this.book = await this.get(`/volumes/${this.$route.params.id}`);
   },
   methods: {
     goBack() {
       this.$router.push("/book");
-    },
-    goToPreview() {
-      window.open(this.book.volumeInfo.previewLink, "_blank");
     }
-  }
+  },
+  mixins: [bookService, api]
 };
 </script>
 

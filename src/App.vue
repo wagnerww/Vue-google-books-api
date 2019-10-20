@@ -19,6 +19,13 @@ export default {
   components: {
     FeedBack,
     appHeader
+  },
+  created() {
+    if (window.localStorage.authToken) {
+      this.$store.commit("setAuthToken", window.localStorage.authToken);
+    } else {
+      this.$router.push("/");
+    }
   }
 };
 </script>
