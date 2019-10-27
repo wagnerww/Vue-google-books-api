@@ -26,8 +26,9 @@ export default {
   created() {
     this.createInterceptors();
 
-    if (window.localStorage.authToken) {
+    if (window.localStorage.authToken && window.localStorage.userId) {
       this.$store.commit("setAuthToken", window.localStorage.authToken);
+      this.$store.commit("setUserId", window.localStorage.userId);
     } else {
       this.$router.push("/");
     }

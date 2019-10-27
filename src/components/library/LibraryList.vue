@@ -28,7 +28,7 @@ export default {
   async created() {
     this.searchOnGoing = true;
     const { items } = await this.get(
-      "/users/117148036497079499490/bookshelves"
+      `/users/${this.$store.state.userId}/bookshelves`
     );
     this.shelfList = items;
     this.searchOnGoing = false;
